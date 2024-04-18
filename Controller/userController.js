@@ -3,8 +3,6 @@ const jwt = require("jsonwebtoken");
 const userSchema = require("../Schema/UserSchema/UserSchema");
 const signUpController = async (req, res) => {
   try {
-    console.log("hello sahi hai bhai");
-    console.log(req.body, "show the request body here now");
     let { email, password } = req.body;
     const emailExist = await userSchema.findOne({ email });
     console.log(emailExist, "emailExist here 00000000");
@@ -12,7 +10,7 @@ const signUpController = async (req, res) => {
       return res.status(400).json({ message: "Email already exist" });
     }
     if (!password) {
-      return res.status(400).json({ message: "something went wrong" });
+      return res.status(400).json({ message: "Something went wrong" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     let response = new userSchema({
@@ -34,7 +32,7 @@ const signUpController = async (req, res) => {
       data: {
         accessToken: token,
         userData: response,
-        message: "userRegistered SuccessFully",
+        message: "User registered successfully",
       },
     });
   } catch (error) {
@@ -52,7 +50,7 @@ const signInController = async (req, res) => {
     }
     const verifyPassword = await bcrypt.compare(password, userExist.password);
     if (!verifyPassword) {
-      return res.status(400).json({ message: "email or Password is wrong" });
+      return res.status(400).json({ message: "Email or Password is wrong" });
     }
     const token = await jwt.sign(
       {
@@ -63,7 +61,7 @@ const signInController = async (req, res) => {
       process.env.SECRET_KEY
     );
     return res.status(200).json({
-      message: "user Logged in SuccessFully",
+      message: "User logged in successfully",
       accessToken: token,
       data: userExist,
     });

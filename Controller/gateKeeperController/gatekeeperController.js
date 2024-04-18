@@ -23,7 +23,7 @@ const registerGateKeeper = async (req, res) => {
     response = await response.save();
     return res
       .status(200)
-      .json({ message: "Entry Added successFully", data: response });
+      .json({ message: "Entry added successfully", data: response });
   } catch (error) {
     res.status(500).json({ message: "Something Went Wrong", error: error });
     console.log(error);
@@ -36,7 +36,7 @@ const getAllgateKeeperData = async (req, res) => {
     let newrespo = [...response].sort((a, b) => b.createdAt - a.createdAt);
     console.log(newrespo, "show the response new ");
     return res.status(200).json({
-      message: "gate keepers data fetched successFully",
+      message: "Gatekeeper data fetched successully",
       data: newrespo,
     });
   } catch (error) {
@@ -53,10 +53,10 @@ const updateGateKeeperData = async (req, res) => {
       { exitTime: exitTime },
       { new: true }
     );
-    console.log(response, "show the response here for the update of the Doc");
+    console.log(response, "Show the response here for the update of the Doc");
     return res
       .status(200)
-      .json({ data: response, message: "Entry updated successFully" });
+      .json({ data: response, message: "Entry updated successfully" });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Something went wrong" });
@@ -80,7 +80,7 @@ const updateGateKeeperControlledData = async (req, res) => {
     );
     return res
       .status(200)
-      .json({ message: "Entries Updated SuccessFully", data: response });
+      .json({ message: "Entry updated successfully", data: response });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Something went wrong" });
